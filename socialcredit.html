@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,7 +13,7 @@
             -moz-user-select: none;
             -ms-user-select: none;
         }
-        
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
@@ -27,7 +28,7 @@
             overflow: hidden;
             position: relative;
         }
-        
+
         #start-screen {
             display: flex;
             flex-direction: column;
@@ -39,7 +40,7 @@
             max-width: 600px;
             margin: 0 auto;
         }
-        
+
         #game-screen {
             display: none;
             flex-direction: column;
@@ -51,7 +52,7 @@
             height: 100%;
             position: relative;
         }
-        
+
         #result-screen {
             display: none;
             flex-direction: column;
@@ -67,7 +68,7 @@
             background-color: rgba(0, 0, 0, 0.9);
             z-index: 100;
         }
-        
+
         h1 {
             font-size: clamp(24px, 5vw, 40px);
             color: yellow;
@@ -76,14 +77,14 @@
             text-align: center;
             text-transform: uppercase;
         }
-        
+
         .eu-flag {
             width: 200px;
             margin-bottom: 30px;
             box-shadow: 0 0 20px rgba(0, 51, 153, 0.8);
             border-radius: 5px;
         }
-        
+
         .start-btn {
             padding: 15px 40px;
             font-size: 24px;
@@ -99,16 +100,16 @@
             width: 80%;
             max-width: 300px;
         }
-        
+
         .start-btn:hover {
             transform: scale(1.05);
             background-color: #ff3333;
         }
-        
+
         .start-btn:active {
             transform: scale(0.98);
         }
-        
+
         .remote-container {
             width: 90%;
             max-width: 320px;
@@ -119,14 +120,14 @@
             margin: 20px auto;
             color: black;
             box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.3),
-                        -10px -10px 30px rgba(255, 255, 255, 0.1),
-                        inset 1px 1px 2px rgba(255, 255, 255, 0.7),
-                        inset -1px -1px 2px rgba(0, 0, 0, 0.2);
+                -10px -10px 30px rgba(255, 255, 255, 0.1),
+                inset 1px 1px 2px rgba(255, 255, 255, 0.7),
+                inset -1px -1px 2px rgba(0, 0, 0, 0.2);
             display: flex;
             flex-direction: column;
             gap: 15px;
         }
-        
+
         .remote-screen {
             width: 100%;
             height: 150px;
@@ -142,7 +143,7 @@
             position: relative;
             box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
         }
-        
+
         .temperature {
             font-size: 48px;
             font-weight: bold;
@@ -151,7 +152,7 @@
             font-family: 'Digital', 'Courier New', monospace;
             text-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
         }
-        
+
         .mode-info {
             display: flex;
             width: 100%;
@@ -159,13 +160,13 @@
             font-size: 14px;
             color: #333;
         }
-        
+
         .buttons {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 12px;
         }
-        
+
         .btn {
             display: flex;
             align-items: center;
@@ -178,39 +179,40 @@
             transition: all 0.2s;
             font-weight: bold;
             color: #333;
-            box-shadow: 2px 2px 5px rgba(0,0,0,0.1),
-                        -2px -2px 5px rgba(255,255,255,0.9);
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1),
+                -2px -2px 5px rgba(255, 255, 255, 0.9);
             text-align: center;
         }
-        
+
         .btn:hover {
             background: linear-gradient(145deg, #e8e8e8, #d0d0d0);
-            box-shadow: 1px 1px 3px rgba(0,0,0,0.1),
-                        -1px -1px 3px rgba(255,255,255,0.9);
+            box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1),
+                -1px -1px 3px rgba(255, 255, 255, 0.9);
         }
-        
+
         .btn:active {
             background: linear-gradient(145deg, #d0d0d0, #e8e8e8);
-            box-shadow: inset 2px 2px 5px rgba(0,0,0,0.1),
-                        inset -2px -2px 5px rgba(255,255,255,0.5);
+            box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.1),
+                inset -2px -2px 5px rgba(255, 255, 255, 0.5);
             transform: translateY(2px);
         }
-        
-        .btn-temp-up, .btn-temp-down {
+
+        .btn-temp-up,
+        .btn-temp-down {
             font-size: 24px;
             font-weight: bold;
             color: #0066cc;
         }
-        
+
         .btn-temp-up {
             background: linear-gradient(145deg, #e0f7ff, #c0e0f0);
         }
-        
+
         .btn-temp-down {
             background: linear-gradient(145deg, #ffe0e0, #ffc0c0);
             color: #cc0033;
         }
-        
+
         .note {
             width: 100%;
             background-color: #ffffcc;
@@ -222,9 +224,9 @@
             color: black;
             text-align: center;
             font-weight: bold;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
-        
+
         .score {
             position: absolute;
             top: 20px;
@@ -240,7 +242,7 @@
             flex-direction: column;
             align-items: center;
         }
-        
+
         .timer {
             position: absolute;
             top: 20px;
@@ -256,16 +258,17 @@
             flex-direction: column;
             align-items: center;
         }
-        
+
         #time-display {
             font-size: 24px;
         }
-        
-        .timer-label, .score-label {
+
+        .timer-label,
+        .score-label {
             font-size: 12px;
             opacity: 0.8;
         }
-        
+
         .result-container {
             display: flex;
             flex-direction: column;
@@ -278,7 +281,7 @@
             padding: 30px;
             box-shadow: 0 0 30px rgba(0, 0, 255, 0.3);
         }
-        
+
         .result-image {
             width: 100%;
             max-width: 450px;
@@ -286,7 +289,7 @@
             margin: 20px 0;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
         }
-        
+
         #social-credit-img {
             width: 200px;
             height: 200px;
@@ -297,7 +300,7 @@
             z-index: 90;
             display: none;
         }
-        
+
         #credit-number {
             position: absolute;
             top: 50%;
@@ -307,14 +310,14 @@
             color: red;
             font-weight: bold;
             z-index: 91;
-            text-shadow: 
+            text-shadow:
                 3px 3px 0 black,
                 -3px -3px 0 black,
                 3px -3px 0 black,
                 -3px 3px 0 black;
             opacity: 0;
         }
-        
+
         .flash {
             position: fixed;
             top: 0;
@@ -327,7 +330,7 @@
             z-index: 99;
             transition: opacity 0.1s;
         }
-        
+
         .confetti {
             position: fixed;
             top: 0;
@@ -338,7 +341,7 @@
             z-index: 90;
             display: none;
         }
-        
+
         .confetti-piece {
             position: absolute;
             width: 10px;
@@ -347,13 +350,13 @@
             top: -10px;
             animation: fall 3s linear forwards;
         }
-        
+
         @keyframes fall {
             to {
                 transform: translateY(100vh) rotate(720deg);
             }
         }
-        
+
         .brand-logo {
             position: absolute;
             top: 10px;
@@ -363,27 +366,67 @@
             color: #ccc;
             font-style: italic;
         }
-        
+
         @keyframes shake {
-            0% { transform: translate(0, 0) rotate(0deg); }
-            10% { transform: translate(-10px, 0) rotate(-5deg); }
-            20% { transform: translate(10px, 0) rotate(5deg); }
-            30% { transform: translate(-10px, 0) rotate(-5deg); }
-            40% { transform: translate(10px, 0) rotate(5deg); }
-            50% { transform: translate(-10px, 0) rotate(-5deg); }
-            60% { transform: translate(10px, 0) rotate(5deg); }
-            70% { transform: translate(-10px, 0) rotate(-5deg); }
-            80% { transform: translate(10px, 0) rotate(5deg); }
-            90% { transform: translate(-10px, 0) rotate(-5deg); }
-            100% { transform: translate(0, 0) rotate(0deg); }
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+
+            10% {
+                transform: translate(-10px, 0) rotate(-5deg);
+            }
+
+            20% {
+                transform: translate(10px, 0) rotate(5deg);
+            }
+
+            30% {
+                transform: translate(-10px, 0) rotate(-5deg);
+            }
+
+            40% {
+                transform: translate(10px, 0) rotate(5deg);
+            }
+
+            50% {
+                transform: translate(-10px, 0) rotate(-5deg);
+            }
+
+            60% {
+                transform: translate(10px, 0) rotate(5deg);
+            }
+
+            70% {
+                transform: translate(-10px, 0) rotate(-5deg);
+            }
+
+            80% {
+                transform: translate(10px, 0) rotate(5deg);
+            }
+
+            90% {
+                transform: translate(-10px, 0) rotate(-5deg);
+            }
+
+            100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
         }
-        
+
         @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+
+            100% {
+                transform: scale(1);
+            }
         }
-        
+
         .police-lights {
             position: fixed;
             top: 0;
@@ -394,7 +437,7 @@
             z-index: 95;
             display: none;
         }
-        
+
         .police-light {
             position: absolute;
             width: 50%;
@@ -402,71 +445,100 @@
             opacity: 0;
             animation: flash-light 0.5s infinite alternate;
         }
-        
+
         .red-light {
             left: 0;
             background: rgba(255, 0, 0, 0.3);
             animation-delay: 0s;
         }
-        
+
         .blue-light {
             right: 0;
             background: rgba(0, 0, 255, 0.3);
             animation-delay: 0.25s;
         }
-        
+
         @keyframes flash-light {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
-        
+
         @media (max-width: 768px) {
             .remote-container {
                 width: 90%;
                 margin-bottom: 20px;
             }
-            
+
             .btn {
                 padding: 12px;
                 font-size: 14px;
             }
-            
-            .score, .timer {
+
+            .score,
+            .timer {
                 padding: 5px 10px;
                 font-size: 16px;
             }
-            
+
             h1 {
                 margin-top: 10px;
                 margin-bottom: 10px;
             }
-            
+
             .result-container {
                 padding: 15px;
             }
         }
     </style>
+    <!-- Favicons -->
+    <link rel="icon" href="media/favicons/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="media/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="media/favicons/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="media/favicons/apple-touch-icon.png">
+    <link rel="manifest" href="media/favicons/site.webmanifest">
+    <link rel="icon" type="image/png" sizes="192x192" href="media/favicons/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="media/favicons/android-chrome-512x512.png">
+    <!-- Twitter Card data -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="European Social Credit Test">
+    <meta name="twitter:description" content="Test your compliance with European temperature regulations. Can you maintain the correct AC temperature?">
+    <meta name="twitter:image" content="http://eusocialcredit.yusufgurdogan.com/media/og.png">
+
+    <!-- Open Graph data for other social platforms like Facebook -->
+    <meta property="og:title" content="European Social Credit Test">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="http://eusocialcredit.yusufgurdogan.com/">
+    <meta property="og:image" content="http://eusocialcredit.yusufgurdogan.com/media/og.png">
+    <meta property="og:description" content="Test your compliance with European temperature regulations. Can you maintain the correct AC temperature?">
+    <meta property="og:site_name" content="European Social Credit System">
 </head>
+
 <body>
     <div id="start-screen">
         <h1>EUROPEAN SOCIAL CREDIT TEST</h1>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Flag_of_Europe.svg/255px-Flag_of_Europe.svg.png" alt="EU Flag" class="eu-flag">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Flag_of_Europe.svg/255px-Flag_of_Europe.svg.png"
+            alt="EU Flag" class="eu-flag">
         <button class="start-btn" id="start-btn">START TEST</button>
     </div>
-    
+
     <div id="game-screen">
         <h1>SET THE CORRECT TEMPERATURE</h1>
-        
+
         <div class="score">
             <span class="score-label">Social Credit</span>
             <span id="credit">1000</span>
         </div>
-        
+
         <div class="timer">
             <span class="timer-label">Time Left</span>
             <span id="time-display">10</span>
         </div>
-        
+
         <div class="remote-container">
             <div class="brand-logo">EuroTech</div>
             <div class="remote-screen">
@@ -480,7 +552,7 @@
                     <span>Timer: OFF</span>
                 </div>
             </div>
-            
+
             <div class="buttons">
                 <button class="btn">MODE</button>
                 <button class="btn">POWER</button>
@@ -492,13 +564,13 @@
                 <button class="btn">ECO</button>
                 <button class="btn">SLEEP</button>
             </div>
-            
+
             <div class="note">
                 AC TEMPERATURE NOT BELOW 26°C FOLLOWING ITALIAN REGULATIONS (2022)
             </div>
         </div>
     </div>
-    
+
     <div id="result-screen">
         <div class="result-container">
             <h1 id="result-title"></h1>
@@ -506,7 +578,7 @@
             <button class="start-btn" id="restart-btn">TRY AGAIN</button>
         </div>
     </div>
-    
+
     <img id="social-credit-img" src="" alt="">
     <div id="credit-number">-100000000</div>
     <div class="flash" id="flash"></div>
@@ -515,13 +587,13 @@
         <div class="police-light red-light"></div>
         <div class="police-light blue-light"></div>
     </div>
-    
+
     <audio id="vineBoom" src="media/vineboom.mp3" preload="auto"></audio>
     <audio id="socialCreditSong" src="media/socialcreditsong.mp3" preload="auto"></audio>
     <audio id="chineseGong" src="media/chinese_gong.mp3" preload="auto"></audio>
     <audio id="siren" src="media/siren.mp3" preload="auto"></audio>
     <audio id="euAnthem" src="media/eu_anthem.mp3" preload="auto"></audio>
-    
+
     <script>
         // DOM Elements
         const startScreen = document.getElementById('start-screen');
@@ -541,14 +613,14 @@
         const flash = document.getElementById('flash');
         const confetti = document.getElementById('confetti');
         const policeLights = document.getElementById('police-lights');
-        
+
         // Audio elements
         const vineBoom = document.getElementById('vineBoom');
         const socialCreditSong = document.getElementById('socialCreditSong');
         const chineseGong = document.getElementById('chineseGong');
         const siren = document.getElementById('siren');
         const euAnthem = document.getElementById('euAnthem');
-        
+
         // Game state
         let temperature = 27.0;
         let socialCredit = 1000;
@@ -556,20 +628,20 @@
         let gameDecided = false;
         let timeLeft = 10;
         let timer;
-        
+
         // URLs for images
         const vonderleyenCall = 'https://www.politico.eu/cdn-cgi/image/width=1160,height=801,quality=80,onerror=redirect,format=auto/wp-content/uploads/2023/10/25/5016674-scaled.jpg';
         const vonderleyenHappy = 'https://i.guim.co.uk/img/media/97fb03dcbe8e98de1dcc9d8bdc809b9a072dd112/0_404_6062_3637/master/6062.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=a9da20faab08470e4878e8d71c9b338f';
         const losingSocialCredit = 'https://img.itch.zone/aW1nLzE1OTI4NzY5LmpwZw==/original/g8wJSA.jpg';
         const winningSocialCredit = 'https://media.tenor.com/6SGaQJ-cLWIAAAAe/social-credit.png';
-        
+
         // Create confetti
         function createConfetti() {
             confetti.innerHTML = '';
             confetti.style.display = 'block';
-            
+
             const colors = ['#0039a6', '#ffcc00', '#ffcc00', '#0039a6', '#ffffff']; // EU colors
-            
+
             for (let i = 0; i < 100; i++) {
                 const piece = document.createElement('div');
                 piece.classList.add('confetti-piece');
@@ -579,44 +651,44 @@
                 piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
                 piece.style.animationDuration = (Math.random() * 3 + 2) + 's';
                 piece.style.animationDelay = (Math.random() * 2) + 's';
-                
+
                 confetti.appendChild(piece);
             }
-            
+
             setTimeout(() => {
                 confetti.style.display = 'none';
             }, 5000);
         }
-        
+
         // Initialize game
         function startGame() {
             startScreen.style.display = 'none';
             gameScreen.style.display = 'flex';
             resultScreen.style.display = 'none';
             policeLights.style.display = 'none';
-            
+
             // Stop any playing audio
             stopAllAudio();
-            
+
             // Start music
             playMusic();
-            
+
             gameActive = true;
             gameDecided = false;
             temperature = 27.0;
             socialCredit = 1000;
             timeLeft = 10;
-            
+
             updateTemperature();
             updateSocialCredit();
             updateTimer();
-            
+
             // Start the countdown
             clearInterval(timer);
             timer = setInterval(() => {
                 timeLeft--;
                 updateTimer();
-                
+
                 if (timeLeft <= 0) {
                     clearInterval(timer);
                     if (!gameDecided) {
@@ -629,46 +701,46 @@
                 }
             }, 1000);
         }
-        
+
         // Stop all audio
         function stopAllAudio() {
             socialCreditSong.pause();
             socialCreditSong.currentTime = 0;
-            
+
             vineBoom.pause();
             vineBoom.currentTime = 0;
-            
+
             chineseGong.pause();
             chineseGong.currentTime = 0;
-            
+
             siren.pause();
             siren.currentTime = 0;
-            
+
             euAnthem.pause();
             euAnthem.currentTime = 0;
         }
-        
+
         // Play the social credit song
         function playMusic() {
             socialCreditSong.currentTime = 0;
             socialCreditSong.volume = 0.7;
-            
+
             // Play the song when user interacts
             const playPromise = socialCreditSong.play();
-            
+
             if (playPromise !== undefined) {
                 playPromise.catch(error => {
                     console.log("Playback prevented. Waiting for interaction: ", error);
                 });
             }
-            
+
             socialCreditSong.loop = true;
         }
-        
+
         // Update timer display
         function updateTimer() {
             timeDisplay.textContent = timeLeft;
-            
+
             if (timeLeft <= 3) {
                 timeDisplay.style.color = '#ff3333';
                 timeDisplay.style.animation = 'pulse 0.5s infinite';
@@ -677,18 +749,18 @@
                 timeDisplay.style.animation = 'none';
             }
         }
-        
+
         // Update temperature display
         function updateTemperature() {
             tempDisplay.textContent = temperature.toFixed(1) + '°C';
-            
+
             // Visual feedback based on temperature
             if (temperature < 26.0) {
                 tempDisplay.style.color = '#ff3333';
             } else {
                 tempDisplay.style.color = '#00cc00';
             }
-            
+
             // Check if game should end due to temperature threshold
             if (gameActive && !gameDecided) {
                 if (temperature < 26.0) {
@@ -696,120 +768,120 @@
                 }
             }
         }
-        
+
         // Update social credit display
         function updateSocialCredit() {
             creditDisplay.textContent = socialCredit.toLocaleString();
         }
-        
+
         // Increase temperature
         function increaseTemperature() {
             if (!gameActive || gameDecided) return;
-            
+
             temperature += 0.5;
             if (temperature > 30) temperature = 30;
             updateTemperature();
-            
+
             // Reward for going higher
             if (temperature >= 28.0) {
                 showGoodSocialCredit();
             }
         }
-        
+
         // Decrease temperature
         function decreaseTemperature() {
             if (!gameActive || gameDecided) return;
-            
+
             temperature -= 0.5;
             if (temperature < 16) temperature = 16;
             updateTemperature();
-            
+
             // Penalize for going too low
             if (temperature < 26.0) {
                 showBadSocialCredit();
             }
         }
-        
+
         // Win game
         function win() {
             gameDecided = true;
             clearInterval(timer);
-            
+
             // Stop social credit song
             socialCreditSong.pause();
-            
+
             // Play EU anthem
             euAnthem.currentTime = 0;
             euAnthem.volume = 0.8;
             euAnthem.play();
-            
+
             // Add social credit
             socialCredit += 15;
             updateSocialCredit();
-            
+
             // Create confetti effect
             createConfetti();
-            
+
             // Play Chinese gong for victory
             chineseGong.currentTime = 0;
             chineseGong.play();
-            
+
             resultTitle.textContent = 'YOU WIN! GOOD CITIZEN!';
             resultImage.src = vonderleyenHappy;
-            
+
             // Show win screen after delay
             setTimeout(() => {
                 resultScreen.style.display = 'flex';
                 gameActive = false;
             }, 1000);
         }
-        
+
         // Lose game
         function lose() {
             gameDecided = true;
             clearInterval(timer);
-            
+
             // Stop social credit song
             socialCreditSong.pause();
-            
+
             // Play police siren
             siren.currentTime = 0;
             siren.volume = 0.7;
             siren.play();
-            
+
             // Show police lights
             policeLights.style.display = 'block';
-            
+
             // Lose massive social credit
             socialCredit -= 100000000;
             updateSocialCredit();
-            
+
             // Play vine boom
             vineBoom.currentTime = 0;
             vineBoom.play();
-            
+
             // Flash screen
             flash.style.opacity = '1';
             setTimeout(() => {
                 flash.style.opacity = '0';
             }, 100);
-            
+
             // Shake screen
             document.body.style.animation = 'shake 0.5s';
             setTimeout(() => {
                 document.body.style.animation = '';
             }, 500);
-            
+
             // Show bad social credit
             socialCreditImg.src = losingSocialCredit;
             socialCreditImg.style.display = 'block';
-            
+
             creditNumber.style.opacity = '1';
             creditNumber.textContent = '-100000000';
-            
+
             resultTitle.textContent = 'YOU LOSE! CRIMINAL DETECTED!';
             resultImage.src = vonderleyenCall;
-            
+
             setTimeout(() => {
                 socialCreditImg.style.display = 'none';
                 creditNumber.style.opacity = '0';
@@ -817,79 +889,79 @@
                 gameActive = false;
             }, 2000);
         }
-        
+
         // Show good social credit animation
         function showGoodSocialCredit() {
             socialCredit += 15;
             updateSocialCredit();
-            
+
             // Play Chinese gong
             chineseGong.currentTime = 0;
             chineseGong.volume = 0.5;
             chineseGong.play();
-            
+
             // Show positive social credit
             socialCreditImg.src = winningSocialCredit;
             socialCreditImg.style.display = 'block';
-            
+
             setTimeout(() => {
                 socialCreditImg.style.display = 'none';
             }, 1500);
         }
-        
+
         // Show bad social credit animation
         function showBadSocialCredit() {
-            socialCredit -= 15;
+            socialCredit -= 100000000;
             updateSocialCredit();
-            
+
             // Play vine boom
             vineBoom.currentTime = 0;
             vineBoom.play();
-            
+
             // Flash screen
             flash.style.opacity = '1';
             setTimeout(() => {
                 flash.style.opacity = '0';
             }, 100);
-            
+
             // Show negative social credit
             socialCreditImg.src = losingSocialCredit;
             socialCreditImg.style.display = 'block';
-            
+
             creditNumber.style.opacity = '1';
             creditNumber.textContent = '-15';
-            
+
             setTimeout(() => {
                 socialCreditImg.style.display = 'none';
                 creditNumber.style.opacity = '0';
             }, 1500);
         }
-        
+
         // Prevent scrolling with arrow keys
-        window.addEventListener('keydown', function(e) {
-            if(['ArrowUp', 'ArrowDown'].indexOf(e.key) > -1) {
+        window.addEventListener('keydown', function (e) {
+            if (['ArrowUp', 'ArrowDown'].indexOf(e.key) > -1) {
                 e.preventDefault();
             }
         });
-        
+
         // Event listeners
         startBtn.addEventListener('click', startGame);
         restartBtn.addEventListener('click', startGame);
-        
+
         tempUp.addEventListener('click', increaseTemperature);
         tempDown.addEventListener('click', decreaseTemperature);
-        
+
         // Touch events for mobile
-        tempUp.addEventListener('touchstart', function(e) {
+        tempUp.addEventListener('touchstart', function (e) {
             e.preventDefault();
             increaseTemperature();
         });
-        
-        tempDown.addEventListener('touchstart', function(e) {
+
+        tempDown.addEventListener('touchstart', function (e) {
             e.preventDefault();
             decreaseTemperature();
         });
-        
+
         // Key controls
         document.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowUp') {
@@ -900,4 +972,5 @@
         });
     </script>
 </body>
+
 </html>

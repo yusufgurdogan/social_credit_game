@@ -506,7 +506,8 @@
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="European Social Credit Test">
-    <meta name="twitter:description" content="Test your compliance with European temperature regulations. Can you maintain the correct AC temperature?">
+    <meta name="twitter:description"
+        content="Test your compliance with European temperature regulations. Can you maintain the correct AC temperature?">
     <meta name="twitter:image" content="http://eusocialcredit.yusufgurdogan.com/media/og.png">
 
     <!-- Open Graph data for other social platforms like Facebook -->
@@ -514,7 +515,8 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="http://eusocialcredit.yusufgurdogan.com/">
     <meta property="og:image" content="http://eusocialcredit.yusufgurdogan.com/media/og.png">
-    <meta property="og:description" content="Test your compliance with European temperature regulations. Can you maintain the correct AC temperature?">
+    <meta property="og:description"
+        content="Test your compliance with European temperature regulations. Can you maintain the correct AC temperature?">
     <meta property="og:site_name" content="European Social Credit System">
 </head>
 
@@ -543,7 +545,7 @@
             <div class="brand-logo">EuroTech</div>
             <div class="remote-screen">
                 <div class="mode-info">
-                    <span>Mode: ❄️ Cooling</span>
+                    <span>Mode: 🔥 Heating</span>
                     <span>THU 6:48</span>
                 </div>
                 <div class="temperature" id="temp-display">27.0°C</div>
@@ -629,6 +631,17 @@
         let timeLeft = 10;
         let timer;
 
+        // Define handlers for temperature changes to fix the mobile issue
+        function handleTempUp(e) {
+            e.preventDefault();
+            increaseTemperature();
+        }
+
+        function handleTempDown(e) {
+            e.preventDefault();
+            decreaseTemperature();
+        }
+
         // URLs for images
         const vonderleyenCall = 'https://www.politico.eu/cdn-cgi/image/width=1160,height=801,quality=80,onerror=redirect,format=auto/wp-content/uploads/2023/10/25/5016674-scaled.jpg';
         const vonderleyenHappy = 'https://i.guim.co.uk/img/media/97fb03dcbe8e98de1dcc9d8bdc809b9a072dd112/0_404_6062_3637/master/6062.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=a9da20faab08470e4878e8d71c9b338f';
@@ -679,6 +692,12 @@
             socialCredit = 1000;
             timeLeft = 10;
 
+            // Remove all existing event listeners to prevent duplication
+            removeAllTempEventListeners();
+
+            // Add event listeners for temperature controls
+            addTempEventListeners();
+
             updateTemperature();
             updateSocialCredit();
             updateTimer();
@@ -700,6 +719,35 @@
                     }
                 }
             }, 1000);
+        }
+
+        // Function to remove all temp event listeners
+        function removeAllTempEventListeners() {
+            // Clone the elements to remove all event listeners
+            const oldTempUp = tempUp;
+            const oldTempDown = tempDown;
+            
+            // Replace with clones
+            const newTempUp = oldTempUp.cloneNode(true);
+            const newTempDown = oldTempDown.cloneNode(true);
+            
+            oldTempUp.parentNode.replaceChild(newTempUp, oldTempUp);
+            oldTempDown.parentNode.replaceChild(newTempDown, oldTempDown);
+            
+            // Update references
+            tempUp = newTempUp;
+            tempDown = newTempDown;
+        }
+
+        // Function to add temperature event listeners
+        function addTempEventListeners() {
+            // Add click events
+            tempUp.addEventListener('click', increaseTemperature);
+            tempDown.addEventListener('click', decreaseTemperature);
+            
+            // Add touch events for mobile
+            tempUp.addEventListener('touchstart', handleTempUp);
+            tempDown.addEventListener('touchstart', handleTempDown);
         }
 
         // Stop all audio
@@ -753,6 +801,14 @@
         // Update temperature display
         function updateTemperature() {
             tempDisplay.textContent = temperature.toFixed(1) + '°C';
+
+            // Update the mode display based on temperature
+            const modeDisplay = document.querySelector('.mode-info span:first-child');
+            if (temperature >= 26.0) {
+                modeDisplay.innerHTML = 'Mode: 🔥 Heating';
+            } else {
+                modeDisplay.innerHTML = 'Mode: ❄️ Cooling';
+            }
 
             // Visual feedback based on temperature
             if (temperature < 26.0) {
@@ -948,26 +1004,20 @@
         startBtn.addEventListener('click', startGame);
         restartBtn.addEventListener('click', startGame);
 
-        tempUp.addEventListener('click', increaseTemperature);
-        tempDown.addEventListener('click', decreaseTemperature);
-
-        // Touch events for mobile
-        tempUp.addEventListener('touchstart', function (e) {
-            e.preventDefault();
-            increaseTemperature();
-        });
-
-        tempDown.addEventListener('touchstart', function (e) {
-            e.preventDefault();
-            decreaseTemperature();
-        });
-
         // Key controls
         document.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowUp') {
                 increaseTemperature();
             } else if (e.key === 'ArrowDown') {
                 decreaseTemperature();
+            }
+        });
+
+        // Make sure the default state of the mode display is correct
+        document.addEventListener('DOMContentLoaded', function() {
+            const modeDisplay = document.querySelector('.mode-info span:first-child');
+            if (modeDisplay) {
+                modeDisplay.innerHTML = 'Mode: 🔥 Heating';
             }
         });
     </script>

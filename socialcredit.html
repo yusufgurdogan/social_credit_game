@@ -458,6 +458,197 @@
             }
         }
 
+        /* Share functionality styles */
+        .share-btn {
+            padding: 15px 40px;
+            font-size: 24px;
+            background-color: #4267B2;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.2s;
+            box-shadow: 0 5px 15px rgba(66, 103, 178, 0.5);
+            text-transform: uppercase;
+            font-weight: bold;
+            width: 80%;
+            max-width: 300px;
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .share-btn:hover {
+            transform: scale(1.05);
+            background-color: #365899;
+        }
+
+        .share-btn:active {
+            transform: scale(0.98);
+        }
+
+        .share-options {
+            display: none;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 51, 0.95);
+            padding: 20px;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            z-index: 200;
+            box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.5);
+            animation: slideUp 0.3s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(100%);
+            }
+
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        .share-option {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            margin-bottom: 10px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .share-option:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .share-option img {
+            width: 32px;
+            height: 32px;
+            margin-right: 15px;
+        }
+
+        .share-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 199;
+            display: none;
+        }
+
+        .score-card {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #0a0a32;
+            border: 3px solid #ffcc00;
+            border-radius: 15px;
+            padding: 30px;
+            width: 90%;
+            max-width: 600px;
+            z-index: 201;
+            display: none;
+            box-shadow: 0 0 30px rgba(255, 204, 0, 0.5);
+        }
+
+        .score-card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .score-card-header img {
+            width: 60px;
+            height: 60px;
+            margin-right: 20px;
+        }
+
+        .score-card-title {
+            font-size: 28px;
+            color: yellow;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .score-card-body {
+            font-size: 22px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .score-value {
+            font-size: 48px;
+            color: #ffcc00;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(255, 204, 0, 0.5);
+            margin: 20px 0;
+        }
+
+        .score-card-footer {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .qr-code {
+            width: 100px;
+            height: 100px;
+            background-color: white;
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        .score-card-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            color: white;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .url-box {
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            margin-top: 10px;
+            font-size: 14px;
+            word-break: break-all;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .url-box:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .copy-message {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+
         @media (max-width: 768px) {
             .remote-container {
                 width: 90%;
@@ -579,6 +770,44 @@
         <div class="police-light blue-light"></div>
     </div>
 
+    <!-- Share functionality elements -->
+    <div class="share-backdrop" id="share-backdrop"></div>
+    <div class="share-options" id="share-options">
+        <h2>Share Your Score</h2>
+        <div class="share-option" id="option-twitter">
+            <img src="https://cdn-icons-png.flaticon.com/512/733/733579.png" alt="Twitter">
+            <span>Share on Twitter</span>
+        </div>
+        <div class="share-option" id="option-facebook">
+            <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook">
+            <span>Share on Facebook</span>
+        </div>
+        <div class="share-option" id="option-copy">
+            <img src="https://cdn-icons-png.flaticon.com/512/2087/2087902.png" alt="Copy link">
+            <span>Copy Share Link</span>
+        </div>
+        <div class="share-option" id="option-screenshot">
+            <img src="https://cdn-icons-png.flaticon.com/512/2311/2311524.png" alt="Screenshot">
+            <span>Generate Image</span>
+        </div>
+    </div>
+
+    <div class="score-card" id="score-card">
+        <button class="score-card-close" id="score-card-close">×</button>
+        <div class="score-card-header">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Flag_of_Europe.svg/255px-Flag_of_Europe.svg.png" alt="EU Flag">
+            <div class="score-card-title">EU Social Credit Certificate</div>
+        </div>
+        <div class="score-card-body">
+            <p>Citizen has demonstrated compliance with EU temperature regulations</p>
+            <div class="score-value" id="card-score-value">1000</div>
+            <p id="card-score-message">GOOD CITIZENSHIP AWARD!</p>
+        </div>
+        <div class="url-box" id="share-url">Click to copy share link</div>
+    </div>
+
+    <div class="copy-message" id="copy-message">Link copied to clipboard!</div>
+
     <audio id="vineBoom" src="media/vineboom.mp3" preload="auto"></audio>
     <audio id="socialCreditSong" src="media/socialcreditsong.mp3" preload="auto"></audio>
     <audio id="chineseGong" src="media/chinese_gong.mp3" preload="auto"></audio>
@@ -660,6 +889,175 @@
             setTimeout(() => {
                 confetti.style.display = 'none';
             }, 5000);
+        }
+    
+        // Share functionality elements and variables
+        const shareBtn = document.createElement('button');
+        shareBtn.className = 'share-btn';
+        shareBtn.id = 'share-btn';
+        shareBtn.textContent = 'SHARE SCORE';
+
+        const shareBackdrop = document.getElementById('share-backdrop');
+        const shareOptions = document.getElementById('share-options');
+        const scoreCard = document.getElementById('score-card');
+        const optionTwitter = document.getElementById('option-twitter');
+        const optionFacebook = document.getElementById('option-facebook');
+        const optionCopy = document.getElementById('option-copy');
+        const optionScreenshot = document.getElementById('option-screenshot');
+        const scoreCardClose = document.getElementById('score-card-close');
+        const cardScoreValue = document.getElementById('card-score-value');
+        const cardScoreMessage = document.getElementById('card-score-message');
+        const shareUrl = document.getElementById('share-url');
+        const copyMessage = document.getElementById('copy-message');
+
+        // Setup share event listeners
+        function setupShareEventListeners() {
+            // Show share options
+            shareBtn.addEventListener('click', function() {
+                showShareOptions();
+            });
+
+            // Close share options when clicking backdrop
+            shareBackdrop.addEventListener('click', function() {
+                hideShareOptions();
+                hideScoreCard();
+            });
+
+            // Twitter share
+            optionTwitter.addEventListener('click', function() {
+                shareOnTwitter();
+            });
+
+            // Facebook share
+            optionFacebook.addEventListener('click', function() {
+                shareOnFacebook();
+            });
+
+            // Copy link
+            optionCopy.addEventListener('click', function() {
+                copyShareLink();
+            });
+
+            // Generate score card image
+            optionScreenshot.addEventListener('click', function() {
+                showScoreCard();
+            });
+
+            // Close score card
+            scoreCardClose.addEventListener('click', function() {
+                hideScoreCard();
+            });
+
+            // Copy link from url box
+            shareUrl.addEventListener('click', function() {
+                copyShareLink();
+            });
+        }
+
+        // Show share options
+        function showShareOptions() {
+            shareBackdrop.style.display = 'block';
+            shareOptions.style.display = 'block';
+        }
+
+        // Hide share options
+        function hideShareOptions() {
+            shareOptions.style.display = 'none';
+            shareBackdrop.style.display = 'none';
+        }
+
+        // Hide score card
+        function hideScoreCard() {
+            scoreCard.style.display = 'none';
+        }
+
+        // Show score card
+        function showScoreCard() {
+            hideShareOptions();
+            
+            // Update score card with current score
+            cardScoreValue.textContent = socialCredit.toLocaleString();
+            
+            // Update message based on score
+            updateCardMessage();
+            
+            // Update share URL
+            const shareLink = generateShareLink();
+            shareUrl.textContent = shareLink;
+            
+            // Show the score card
+            scoreCard.style.display = 'block';
+            shareBackdrop.style.display = 'block';
+        }
+
+        // Update card message based on score
+        function updateCardMessage() {
+            let message;
+            
+            if (socialCredit >= 2000) {
+                message = "SUPREME CITIZEN AWARD! 🏆";
+            } else if (socialCredit >= 1500) {
+                message = "EXCELLENT CITIZENSHIP AWARD! 🥇";
+            } else if (socialCredit > 0) {
+                message = "GOOD CITIZENSHIP AWARD! 🥈";
+            } else {
+                message = "CLIMATE CRIMINAL! EXECUTION DATE SCHEDULED! ☠️";
+            }
+            
+            cardScoreMessage.textContent = message;
+        }
+
+        // Generate share link with score
+        function generateShareLink() {
+            const baseUrl = window.location.href.split('?')[0];
+            return `${baseUrl}?score=${socialCredit}`;
+        }
+
+        // Share on Twitter
+        function shareOnTwitter() {
+            const text = `I scored ${socialCredit.toLocaleString()} in the European Social Credit Test! Can you maintain the correct AC temperature? 🇪🇺🌡️`;
+            const url = generateShareLink();
+            const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
+            
+            window.open(twitterUrl, '_blank');
+        }
+
+        // Share on Facebook
+        function shareOnFacebook() {
+            const url = generateShareLink();
+            const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+            
+            window.open(facebookUrl, '_blank');
+        }
+
+        // Copy share link to clipboard
+        function copyShareLink() {
+            const shareLink = generateShareLink();
+            
+            navigator.clipboard.writeText(shareLink).then(function() {
+                showCopyMessage();
+            });
+        }
+
+        // Show copy message notification
+        function showCopyMessage() {
+            copyMessage.style.opacity = '1';
+            
+            setTimeout(() => {
+                copyMessage.style.opacity = '0';
+            }, 2000);
+        }
+
+        // Add the share button to result screen
+        function addShareButton() {
+            const resultContainer = document.querySelector('.result-container');
+            if (resultContainer) {
+                // Add the button after restart-btn
+                const restartBtn = document.getElementById('restart-btn');
+                if (restartBtn && restartBtn.parentNode) {
+                    restartBtn.parentNode.insertBefore(shareBtn, restartBtn.nextSibling);
+                }
+            }
         }
     
         // Initialize game
@@ -789,7 +1187,13 @@
     
             // Update the mode display based on temperature
             const modeDisplay = document.querySelector('.mode-info span:first-child');
-            if (temperature >= 26.0) {
+            if (temperature >= 42.0) {
+                modeDisplay.innerHTML = 'Mode: 🌋 HELLFIRE';
+            } else if (temperature >= 32.0) {
+                modeDisplay.innerHTML = 'Mode: 🔥 INFERNO';
+            } else if (temperature >= 29.0) {
+                modeDisplay.innerHTML = 'Mode: 🥵 SAUNA';
+            } else if (temperature >= 26.0) {
                 modeDisplay.innerHTML = 'Mode: 🔥 Heating';
             } else {
                 modeDisplay.innerHTML = 'Mode: ❄️ Cooling';
@@ -820,7 +1224,7 @@
             if (!gameActive || gameDecided) return;
     
             temperature += 0.5;
-            if (temperature > 30) temperature = 30;
+            if (temperature > 50) temperature = 50;
             updateTemperature();
     
             // Reward for going higher
@@ -856,8 +1260,9 @@
             euAnthem.volume = 0.8;
             euAnthem.play();
     
-            // Add social credit
-            socialCredit += 15;
+            // Add final bonus based on remaining time
+            const timeBonus = timeLeft * 100;
+            socialCredit += timeBonus + 1000;
             updateSocialCredit();
     
             // Create confetti effect
@@ -867,14 +1272,28 @@
             chineseGong.currentTime = 0;
             chineseGong.play();
     
-            resultTitle.textContent = 'YOU WIN! GOOD CITIZEN!';
+            // Determine award level based on score
+            let awardMessage;
+            if (socialCredit >= 2000) {
+                awardMessage = "SUPREME CITIZEN AWARD! 🏆<br>You've been selected for a special EU committee position!";
+            } else if (socialCredit >= 1500) {
+                awardMessage = "EXCELLENT CITIZENSHIP AWARD! 🥇<br>Extra energy ration credits have been added to your account.";
+            } else {
+                awardMessage = "GOOD CITIZENSHIP AWARD! 🥈<br>Your compliance has been noted in your permanent record.";
+            }
+    
+            resultTitle.innerHTML = `YOU WIN! FINAL SCORE: ${socialCredit.toLocaleString()}<br><span style="font-size: 18px; color: #FFD700;">${awardMessage}</span>`;
             resultImage.src = vonderleyenHappy;
     
-            // Show win screen after delay
-            setTimeout(() => {
-                resultScreen.style.display = 'flex';
-                gameActive = false;
-            }, 1000);
+            // Show win screen after delay (no timeout - stays until player chooses to restart)
+            resultScreen.style.display = 'flex';
+            gameActive = false;
+            
+            // Add share button to result screen
+            addShareButton();
+            
+            // Setup share event listeners
+            setupShareEventListeners();
         }
     
         // Lose game
@@ -894,7 +1313,8 @@
             policeLights.style.display = 'block';
     
             // Lose massive social credit
-            socialCredit -= 100000000;
+            const finalScore = socialCredit - 100000000;
+            socialCredit = finalScore;
             updateSocialCredit();
     
             // Play vine boom
@@ -920,9 +1340,19 @@
             // Make credit number visible with display block
             creditNumber.style.display = 'block';
             creditNumber.style.opacity = '1';
-            creditNumber.textContent = '-100000000';
+            creditNumber.textContent = finalScore.toLocaleString();
     
-            resultTitle.textContent = 'YOU LOSE! CRIMINAL DETECTED!';
+            // Determine punishment message based on how low the temperature went
+            let punishmentMessage;
+            if (temperature < 22.0) {
+                punishmentMessage = "EXTREME CLIMATE CRIMINAL!<br>Execution date: Tomorrow at dawn. Your family will be billed for the bullet.";
+            } else if (temperature < 24.0) {
+                punishmentMessage = "SERIOUS CLIMATE OFFENDER!<br>5 years of mandatory climate re-education camp has been scheduled.";
+            } else {
+                punishmentMessage = "CLIMATE REGULATION VIOLATOR!<br>Your heating privileges have been revoked for the next winter.";
+            }
+    
+            resultTitle.innerHTML = `YOU LOSE! SCORE: ${finalScore.toLocaleString()}<br><span style="font-size: 18px; color: #FF3333;">${punishmentMessage}</span>`;
             resultImage.src = vonderleyenCall;
     
             setTimeout(() => {
@@ -930,8 +1360,16 @@
                 // COMPLETELY hide credit number
                 creditNumber.style.display = 'none';
                 creditNumber.style.opacity = '0';
+                
+                // Show the result screen (no timeout - stays until player chooses to restart)
                 resultScreen.style.display = 'flex';
                 gameActive = false;
+                
+                // Add share button to result screen
+                addShareButton();
+                
+                // Setup share event listeners
+                setupShareEventListeners();
             }, 2000);
         }
     
@@ -986,6 +1424,49 @@
             }, 1500);
         }
     
+        // Check if the URL has a score parameter and handle it
+        function checkForScoreInUrl() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const scoreParam = urlParams.get('score');
+            
+            if (scoreParam) {
+                const sharedScore = parseInt(scoreParam);
+                
+                // Show a message about the shared score
+                const scoreMessage = document.createElement('div');
+                scoreMessage.style.position = 'absolute';
+                scoreMessage.style.top = '10px';
+                scoreMessage.style.left = '50%';
+                scoreMessage.style.transform = 'translateX(-50%)';
+                scoreMessage.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+                scoreMessage.style.color = 'white';
+                scoreMessage.style.padding = '10px 20px';
+                scoreMessage.style.borderRadius = '5px';
+                scoreMessage.style.zIndex = '1000';
+                scoreMessage.style.textAlign = 'center';
+                
+                if (!isNaN(sharedScore)) {
+                    if (sharedScore > 0) {
+                        scoreMessage.innerHTML = `Someone scored <span style="color: yellow; font-weight: bold;">${sharedScore.toLocaleString()}</span> in the EU Social Credit Test!<br>Can you beat their score?`;
+                    } else {
+                        scoreMessage.innerHTML = `Someone scored a catastrophic <span style="color: red; font-weight: bold;">${sharedScore.toLocaleString()}</span> in the EU Social Credit Test!<br>Can you avoid their fate?`;
+                    }
+                    
+                    document.body.appendChild(scoreMessage);
+                    
+                    // Remove the message after 5 seconds
+                    setTimeout(() => {
+                        scoreMessage.style.opacity = '0';
+                        scoreMessage.style.transition = 'opacity 1s';
+                        
+                        setTimeout(() => {
+                            document.body.removeChild(scoreMessage);
+                        }, 1000);
+                    }, 5000);
+                }
+            }
+        }
+    
         // Prevent scrolling with arrow keys
         window.addEventListener('keydown', function (e) {
             if (['ArrowUp', 'ArrowDown'].indexOf(e.key) > -1) {
@@ -1006,12 +1487,16 @@
             }
         });
     
-        // Make sure the default state of the mode display is correct
+        // Check for shared score on page load
         document.addEventListener('DOMContentLoaded', function() {
+            // Make sure the default state of the mode display is correct
             const modeDisplay = document.querySelector('.mode-info span:first-child');
             if (modeDisplay) {
                 modeDisplay.innerHTML = 'Mode: 🔥 Heating';
             }
+            
+            // Check if there's a score in the URL
+            checkForScoreInUrl();
         });
     </script>
 </body>

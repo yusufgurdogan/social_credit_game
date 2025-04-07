@@ -642,6 +642,32 @@
             decreaseTemperature();
         }
 
+        // Refresh button controls: get fresh references to the buttons and reattach event listeners
+        function refreshButtonControls() {
+            // Get fresh references to the buttons after any DOM changes
+            tempUp = document.getElementById('temp-up');
+            tempDown = document.getElementById('temp-down');
+
+            // Remove all event listeners by cloning
+            const newTempUp = tempUp.cloneNode(true);
+            const newTempDown = tempDown.cloneNode(true);
+
+            tempUp.parentNode.replaceChild(newTempUp, tempUp);
+            tempDown.parentNode.replaceChild(newTempDown, tempDown);
+
+            // Update our references
+            tempUp = newTempUp;
+            tempDown = newTempDown;
+
+            // Add fresh event listeners with both click and touch events
+            tempUp.addEventListener('click', increaseTemperature);
+            tempDown.addEventListener('click', decreaseTemperature);
+            tempUp.addEventListener('touchstart', handleTempUp);
+            tempDown.addEventListener('touchstart', handleTempDown);
+
+            console.log("Temperature controls refreshed");
+        }
+
         // URLs for images
         const vonderleyenCall = 'https://www.politico.eu/cdn-cgi/image/width=1160,height=801,quality=80,onerror=redirect,format=auto/wp-content/uploads/2023/10/25/5016674-scaled.jpg';
         const vonderleyenHappy = 'https://i.guim.co.uk/img/media/97fb03dcbe8e98de1dcc9d8bdc809b9a072dd112/0_404_6062_3637/master/6062.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=a9da20faab08470e4878e8d71c9b338f';
@@ -692,11 +718,8 @@
             socialCredit = 1000;
             timeLeft = 10;
 
-            // Remove all existing event listeners to prevent duplication
-            removeAllTempEventListeners();
-
-            // Add event listeners for temperature controls
-            addTempEventListeners();
+            // Refresh button controls
+            refreshButtonControls();
 
             updateTemperature();
             updateSocialCredit();
@@ -719,35 +742,6 @@
                     }
                 }
             }, 1000);
-        }
-
-        // Function to remove all temp event listeners
-        function removeAllTempEventListeners() {
-            // Clone the elements to remove all event listeners
-            const oldTempUp = tempUp;
-            const oldTempDown = tempDown;
-            
-            // Replace with clones
-            const newTempUp = oldTempUp.cloneNode(true);
-            const newTempDown = oldTempDown.cloneNode(true);
-            
-            oldTempUp.parentNode.replaceChild(newTempUp, oldTempUp);
-            oldTempDown.parentNode.replaceChild(newTempDown, oldTempDown);
-            
-            // Update references
-            tempUp = newTempUp;
-            tempDown = newTempDown;
-        }
-
-        // Function to add temperature event listeners
-        function addTempEventListeners() {
-            // Add click events
-            tempUp.addEventListener('click', increaseTemperature);
-            tempDown.addEventListener('click', decreaseTemperature);
-            
-            // Add touch events for mobile
-            tempUp.addEventListener('touchstart', handleTempUp);
-            tempDown.addEventListener('touchstart', handleTempDown);
         }
 
         // Stop all audio

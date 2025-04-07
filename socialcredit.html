@@ -301,7 +301,6 @@
             display: none;
         }
 
-        /* Add this to your CSS */
         #credit-number {
             position: absolute;
             top: 50%;
@@ -317,7 +316,6 @@
                 3px -3px 0 black,
                 -3px 3px 0 black;
             opacity: 0;
-            pointer-events: none;
         }
 
         .flash {
@@ -720,10 +718,6 @@
             socialCredit = 1000;
             timeLeft = 10;
 
-            creditNumber.style.opacity = '0';
-            creditNumber.style.pointerEvents = 'none';
-            creditNumber.textContent = '-100000000'; // Reset to default text
-
             // Refresh button controls
             refreshButtonControls();
 
@@ -933,7 +927,6 @@
             socialCreditImg.style.display = 'block';
 
             creditNumber.style.opacity = '1';
-            creditNumber.style.pointerEvents = 'auto';
             creditNumber.textContent = '-100000000';
 
             resultTitle.textContent = 'YOU LOSE! CRIMINAL DETECTED!';
@@ -942,7 +935,6 @@
             setTimeout(() => {
                 socialCreditImg.style.display = 'none';
                 creditNumber.style.opacity = '0';
-                creditNumber.style.pointerEvents = 'none';
                 resultScreen.style.display = 'flex';
                 gameActive = false;
             }, 2000);
@@ -985,14 +977,13 @@
             // Show negative social credit
             socialCreditImg.src = losingSocialCredit;
             socialCreditImg.style.display = 'block';
+
             creditNumber.style.opacity = '1';
-            creditNumber.style.pointerEvents = 'auto'; // Make it capture clicks when visible
             creditNumber.textContent = 'YOU LOST';
 
             setTimeout(() => {
                 socialCreditImg.style.display = 'none';
                 creditNumber.style.opacity = '0';
-                creditNumber.style.pointerEvents = 'none'; // Stop capturing clicks when hidden
             }, 1500);
         }
 
@@ -1017,7 +1008,7 @@
         });
 
         // Make sure the default state of the mode display is correct
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             const modeDisplay = document.querySelector('.mode-info span:first-child');
             if (modeDisplay) {
                 modeDisplay.innerHTML = 'Mode: 🔥 Heating';

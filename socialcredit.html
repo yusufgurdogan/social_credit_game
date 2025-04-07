@@ -615,14 +615,14 @@
         const flash = document.getElementById('flash');
         const confetti = document.getElementById('confetti');
         const policeLights = document.getElementById('police-lights');
-
+    
         // Audio elements
         const vineBoom = document.getElementById('vineBoom');
         const socialCreditSong = document.getElementById('socialCreditSong');
         const chineseGong = document.getElementById('chineseGong');
         const siren = document.getElementById('siren');
         const euAnthem = document.getElementById('euAnthem');
-
+    
         // Game state
         let temperature = 27.0;
         let socialCredit = 1000;
@@ -630,57 +630,31 @@
         let gameDecided = false;
         let timeLeft = 10;
         let timer;
-
+    
         // Define handlers for temperature changes to fix the mobile issue
         function handleTempUp(e) {
             e.preventDefault();
             increaseTemperature();
         }
-
+    
         function handleTempDown(e) {
             e.preventDefault();
             decreaseTemperature();
         }
-
-        // Refresh button controls: get fresh references to the buttons and reattach event listeners
-        function refreshButtonControls() {
-            // Get fresh references to the buttons after any DOM changes
-            tempUp = document.getElementById('temp-up');
-            tempDown = document.getElementById('temp-down');
-
-            // Remove all event listeners by cloning
-            const newTempUp = tempUp.cloneNode(true);
-            const newTempDown = tempDown.cloneNode(true);
-
-            tempUp.parentNode.replaceChild(newTempUp, tempUp);
-            tempDown.parentNode.replaceChild(newTempDown, tempDown);
-
-            // Update our references
-            tempUp = newTempUp;
-            tempDown = newTempDown;
-
-            // Add fresh event listeners with both click and touch events
-            tempUp.addEventListener('click', increaseTemperature);
-            tempDown.addEventListener('click', decreaseTemperature);
-            tempUp.addEventListener('touchstart', handleTempUp);
-            tempDown.addEventListener('touchstart', handleTempDown);
-
-            console.log("Temperature controls refreshed");
-        }
-
+    
         // URLs for images
         const vonderleyenCall = 'https://www.politico.eu/cdn-cgi/image/width=1160,height=801,quality=80,onerror=redirect,format=auto/wp-content/uploads/2023/10/25/5016674-scaled.jpg';
         const vonderleyenHappy = 'https://i.guim.co.uk/img/media/97fb03dcbe8e98de1dcc9d8bdc809b9a072dd112/0_404_6062_3637/master/6062.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=a9da20faab08470e4878e8d71c9b338f';
         const losingSocialCredit = 'https://img.itch.zone/aW1nLzE1OTI4NzY5LmpwZw==/original/g8wJSA.jpg';
         const winningSocialCredit = 'https://media.tenor.com/6SGaQJ-cLWIAAAAe/social-credit.png';
-
+    
         // Create confetti
         function createConfetti() {
             confetti.innerHTML = '';
             confetti.style.display = 'block';
-
+    
             const colors = ['#0039a6', '#ffcc00', '#ffcc00', '#0039a6', '#ffffff']; // EU colors
-
+    
             for (let i = 0; i < 100; i++) {
                 const piece = document.createElement('div');
                 piece.classList.add('confetti-piece');
@@ -690,47 +664,51 @@
                 piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
                 piece.style.animationDuration = (Math.random() * 3 + 2) + 's';
                 piece.style.animationDelay = (Math.random() * 2) + 's';
-
+    
                 confetti.appendChild(piece);
             }
-
+    
             setTimeout(() => {
                 confetti.style.display = 'none';
             }, 5000);
         }
-
+    
         // Initialize game
         function startGame() {
             startScreen.style.display = 'none';
             gameScreen.style.display = 'flex';
             resultScreen.style.display = 'none';
             policeLights.style.display = 'none';
-
+    
+            // COMPLETELY hide credit number - not just opacity
+            creditNumber.style.display = 'none';
+            creditNumber.style.opacity = '0';
+    
             // Stop any playing audio
             stopAllAudio();
-
+    
             // Start music
             playMusic();
-
+    
             gameActive = true;
             gameDecided = false;
             temperature = 27.0;
             socialCredit = 1000;
             timeLeft = 10;
-
-            // Refresh button controls
+    
+            // Refresh all button controls
             refreshButtonControls();
-
+    
             updateTemperature();
             updateSocialCredit();
             updateTimer();
-
+    
             // Start the countdown
             clearInterval(timer);
             timer = setInterval(() => {
                 timeLeft--;
                 updateTimer();
-
+    
                 if (timeLeft <= 0) {
                     clearInterval(timer);
                     if (!gameDecided) {
@@ -743,46 +721,70 @@
                 }
             }, 1000);
         }
-
+    
+        // Refresh button controls
+        function refreshButtonControls() {
+            // Get fresh references to the buttons after any DOM changes
+            tempUp = document.getElementById('temp-up');
+            tempDown = document.getElementById('temp-down');
+            
+            // Remove all event listeners by cloning
+            const newTempUp = tempUp.cloneNode(true);
+            const newTempDown = tempDown.cloneNode(true);
+            
+            tempUp.parentNode.replaceChild(newTempUp, tempUp);
+            tempDown.parentNode.replaceChild(newTempDown, tempDown);
+            
+            // Update our references
+            tempUp = newTempUp;
+            tempDown = newTempDown;
+            
+            // Add fresh event listeners with both click and touch events
+            tempUp.addEventListener('click', increaseTemperature);
+            tempDown.addEventListener('click', decreaseTemperature);
+            tempUp.addEventListener('touchstart', handleTempUp);
+            tempDown.addEventListener('touchstart', handleTempDown);
+        }
+    
         // Stop all audio
         function stopAllAudio() {
             socialCreditSong.pause();
             socialCreditSong.currentTime = 0;
-
+    
             vineBoom.pause();
             vineBoom.currentTime = 0;
-
+    
             chineseGong.pause();
             chineseGong.currentTime = 0;
-
+    
             siren.pause();
             siren.currentTime = 0;
-
+    
             euAnthem.pause();
             euAnthem.currentTime = 0;
         }
-
+    
         // Play the social credit song
         function playMusic() {
             socialCreditSong.currentTime = 0;
             socialCreditSong.volume = 0.7;
-
+    
             // Play the song when user interacts
             const playPromise = socialCreditSong.play();
-
+    
             if (playPromise !== undefined) {
                 playPromise.catch(error => {
                     console.log("Playback prevented. Waiting for interaction: ", error);
                 });
             }
-
+    
             socialCreditSong.loop = true;
         }
-
+    
         // Update timer display
         function updateTimer() {
             timeDisplay.textContent = timeLeft;
-
+    
             if (timeLeft <= 3) {
                 timeDisplay.style.color = '#ff3333';
                 timeDisplay.style.animation = 'pulse 0.5s infinite';
@@ -791,11 +793,11 @@
                 timeDisplay.style.animation = 'none';
             }
         }
-
+    
         // Update temperature display
         function updateTemperature() {
             tempDisplay.textContent = temperature.toFixed(1) + '°C';
-
+    
             // Update the mode display based on temperature
             const modeDisplay = document.querySelector('.mode-info span:first-child');
             if (temperature >= 26.0) {
@@ -803,14 +805,14 @@
             } else {
                 modeDisplay.innerHTML = 'Mode: ❄️ Cooling';
             }
-
+    
             // Visual feedback based on temperature
             if (temperature < 26.0) {
                 tempDisplay.style.color = '#ff3333';
             } else {
                 tempDisplay.style.color = '#00cc00';
             }
-
+    
             // Check if game should end due to temperature threshold
             if (gameActive && !gameDecided) {
                 if (temperature < 26.0) {
@@ -818,186 +820,194 @@
                 }
             }
         }
-
+    
         // Update social credit display
         function updateSocialCredit() {
             creditDisplay.textContent = socialCredit.toLocaleString();
         }
-
+    
         // Increase temperature
         function increaseTemperature() {
             if (!gameActive || gameDecided) return;
-
+    
             temperature += 0.5;
             if (temperature > 30) temperature = 30;
             updateTemperature();
-
+    
             // Reward for going higher
             if (temperature >= 28.0) {
                 showGoodSocialCredit();
             }
         }
-
+    
         // Decrease temperature
         function decreaseTemperature() {
             if (!gameActive || gameDecided) return;
-
+    
             temperature -= 0.5;
             if (temperature < 16) temperature = 16;
             updateTemperature();
-
+    
             // Penalize for going too low
             if (temperature < 26.0) {
                 showBadSocialCredit();
             }
         }
-
+    
         // Win game
         function win() {
             gameDecided = true;
             clearInterval(timer);
-
+    
             // Stop social credit song
             socialCreditSong.pause();
-
+    
             // Play EU anthem
             euAnthem.currentTime = 0;
             euAnthem.volume = 0.8;
             euAnthem.play();
-
+    
             // Add social credit
             socialCredit += 15;
             updateSocialCredit();
-
+    
             // Create confetti effect
             createConfetti();
-
+    
             // Play Chinese gong for victory
             chineseGong.currentTime = 0;
             chineseGong.play();
-
+    
             resultTitle.textContent = 'YOU WIN! GOOD CITIZEN!';
             resultImage.src = vonderleyenHappy;
-
+    
             // Show win screen after delay
             setTimeout(() => {
                 resultScreen.style.display = 'flex';
                 gameActive = false;
             }, 1000);
         }
-
+    
         // Lose game
         function lose() {
             gameDecided = true;
             clearInterval(timer);
-
+    
             // Stop social credit song
             socialCreditSong.pause();
-
+    
             // Play police siren
             siren.currentTime = 0;
             siren.volume = 0.7;
             siren.play();
-
+    
             // Show police lights
             policeLights.style.display = 'block';
-
+    
             // Lose massive social credit
             socialCredit -= 100000000;
             updateSocialCredit();
-
+    
             // Play vine boom
             vineBoom.currentTime = 0;
             vineBoom.play();
-
+    
             // Flash screen
             flash.style.opacity = '1';
             setTimeout(() => {
                 flash.style.opacity = '0';
             }, 100);
-
+    
             // Shake screen
             document.body.style.animation = 'shake 0.5s';
             setTimeout(() => {
                 document.body.style.animation = '';
             }, 500);
-
+    
             // Show bad social credit
             socialCreditImg.src = losingSocialCredit;
             socialCreditImg.style.display = 'block';
-
+    
+            // Make credit number visible with display block
+            creditNumber.style.display = 'block';
             creditNumber.style.opacity = '1';
             creditNumber.textContent = '-100000000';
-
+    
             resultTitle.textContent = 'YOU LOSE! CRIMINAL DETECTED!';
             resultImage.src = vonderleyenCall;
-
+    
             setTimeout(() => {
                 socialCreditImg.style.display = 'none';
+                // COMPLETELY hide credit number
+                creditNumber.style.display = 'none';
                 creditNumber.style.opacity = '0';
                 resultScreen.style.display = 'flex';
                 gameActive = false;
             }, 2000);
         }
-
+    
         // Show good social credit animation
         function showGoodSocialCredit() {
             socialCredit += 15;
             updateSocialCredit();
-
+    
             // Play Chinese gong
             chineseGong.currentTime = 0;
             chineseGong.volume = 0.5;
             chineseGong.play();
-
+    
             // Show positive social credit
             socialCreditImg.src = winningSocialCredit;
             socialCreditImg.style.display = 'block';
-
+    
             setTimeout(() => {
                 socialCreditImg.style.display = 'none';
             }, 1500);
         }
-
+    
         // Show bad social credit animation
         function showBadSocialCredit() {
             socialCredit -= 100000000;
             updateSocialCredit();
-
+    
             // Play vine boom
             vineBoom.currentTime = 0;
             vineBoom.play();
-
+    
             // Flash screen
             flash.style.opacity = '1';
             setTimeout(() => {
                 flash.style.opacity = '0';
             }, 100);
-
+    
             // Show negative social credit
             socialCreditImg.src = losingSocialCredit;
             socialCreditImg.style.display = 'block';
-
+    
+            // Make credit number visible with display block
+            creditNumber.style.display = 'block';
             creditNumber.style.opacity = '1';
             creditNumber.textContent = 'YOU LOST';
-
+    
             setTimeout(() => {
                 socialCreditImg.style.display = 'none';
+                // COMPLETELY hide credit number
+                creditNumber.style.display = 'none';
                 creditNumber.style.opacity = '0';
             }, 1500);
         }
-
+    
         // Prevent scrolling with arrow keys
         window.addEventListener('keydown', function (e) {
             if (['ArrowUp', 'ArrowDown'].indexOf(e.key) > -1) {
                 e.preventDefault();
             }
         });
-
+    
         // Event listeners
         startBtn.addEventListener('click', startGame);
         restartBtn.addEventListener('click', startGame);
-
+    
         // Key controls
         document.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowUp') {
@@ -1006,7 +1016,7 @@
                 decreaseTemperature();
             }
         });
-
+    
         // Make sure the default state of the mode display is correct
         document.addEventListener('DOMContentLoaded', function() {
             const modeDisplay = document.querySelector('.mode-info span:first-child');
